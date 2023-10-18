@@ -1,0 +1,46 @@
+:root {
+  --correct: #2ac55e;
+  --semi-correct: #eab306;
+  --wrong: #94a3b8;
+  --primary: #e2e8f0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.keyboard__row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.keyboard__letter {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  background: var(--primary);
+  border-radius: 7px;
+}
+.keyboard__letter--wrong {
+  background: var(--wrong);
+}
+.keyboard__letter--correct {
+  background: var(--correct);
+}

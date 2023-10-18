@@ -1,7 +1,26 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import Board from "./Board";
+import Keyboard from "./Keyboard";
+import { words } from "./words";
+
+const ROWS = 6;
 
 function App() {
-  return <div className="App">App</div>;
+  const [solution, setSolution] = useState("");
+  const [guesses, setGuesses] = useState(new Array(ROWS).fill(""));
+  const [currentRow, setCurrentRow] = useState(0);
+
+  useEffect(() => {
+    setSolution(words[Math.floor(Math.random() * words.length)]);
+  }, []);
+
+  return (
+    <div className="App">
+      <Board guesses={guesses} />
+      <Keyboard />
+    </div>
+  );
 }
 
 export default App;
