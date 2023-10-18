@@ -33,16 +33,24 @@ function App() {
             )
           );
           setCurrentRow((currentRow) => currentRow + 1);
-          setCurrentWord((currentWord) => "");
+          setCurrentWord("");
         }
       }
 
       if (keyCode >= 65 && keyCode <= 90) {
-        setCurrentWord((currentRow) => currentRow + key);
+        setCurrentWord((currentRow) => currentRow + key.toUpperCase());
       }
     },
-    [currentWord]
+    [currentWord, currentRow]
   );
+
+  useEffect(() => {
+    if (guesses[currentRow - 1] === solution && solution) {
+      console.log("win");
+    } else if (currentRow > 5) {
+      console.log("lose");
+    }
+  }, [currentRow, guesses, solution]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -53,7 +61,6 @@ function App() {
 
   return (
     <div className="App">
-      {currentWord}
       <Board
         guesses={guesses}
         currentWord={currentWord}
