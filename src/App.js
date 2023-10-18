@@ -20,8 +20,21 @@ function App() {
   const handleKeyDown = useCallback(
     (e) => {
       const { key, keyCode } = e;
+      if (keyCode === 8 && currentWord.length) {
+        setCurrentWord((currentRow) => currentRow.slice(0, -1));
+        return;
+      }
       if (currentWord.length === 5) {
         if (keyCode !== 13 && keyCode !== 8) return;
+        if (keyCode === 13) {
+          setGuesses((guesses) =>
+            guesses.map((guess, idx) =>
+              idx === currentRow ? currentWord : guess
+            )
+          );
+          setCurrentRow((currentRow) => currentRow + 1);
+          setCurrentWord((currentWord) => "");
+        }
       }
 
       if (keyCode >= 65 && keyCode <= 90) {
