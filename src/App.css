@@ -25,6 +25,7 @@ body {
   flex-direction: column;
   flex: 1;
   gap: 10px;
+  justify-content: center;
 }
 .keyboard__row {
   display: flex;
