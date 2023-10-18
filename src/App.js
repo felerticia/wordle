@@ -8,8 +8,9 @@ const ROWS = 6;
 
 function App() {
   const [solution, setSolution] = useState("");
-  const [guesses, setGuesses] = useState(new Array(ROWS).fill(""));
+  const [guesses, setGuesses] = useState(new Array(ROWS).fill("abc"));
   const [currentRow, setCurrentRow] = useState(0);
+  const [letters, setLetters] = useState("");
 
   useEffect(() => {
     setSolution(words[Math.floor(Math.random() * words.length)]);
@@ -18,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Board guesses={guesses} />
-      <Keyboard />
+      <Keyboard letters={[]} />
     </div>
   );
 }

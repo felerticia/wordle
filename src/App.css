@@ -16,11 +16,14 @@ body {
 .App {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .keyboard {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 10px;
 }
 .keyboard__row {
@@ -43,4 +46,28 @@ body {
 }
 .keyboard__letter--correct {
   background: var(--correct);
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.board__row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.board__cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
 }
