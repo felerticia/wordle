@@ -6,6 +6,10 @@ import { words } from "./words";
 
 const ROWS = 6;
 
+const merge = (letters, word) => {
+  return Array.from(new Set(letters + word)).join("");
+};
+
 function App() {
   const [solution, setSolution] = useState("");
   const [guesses, setGuesses] = useState(new Array(ROWS).fill(""));
@@ -33,6 +37,7 @@ function App() {
             )
           );
           setCurrentRow((currentRow) => currentRow + 1);
+          setLetters((letters) => merge(letters, currentWord));
           setCurrentWord("");
         }
       }
@@ -65,8 +70,9 @@ function App() {
         guesses={guesses}
         currentWord={currentWord}
         currentRow={currentRow}
+        solution={solution}
       />
-      <Keyboard letters={[]} />
+      <Keyboard letters={letters} />
     </div>
   );
 }

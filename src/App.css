@@ -42,11 +42,15 @@ body {
   background: var(--primary);
   border-radius: 7px;
 }
-.keyboard__letter--wrong {
-  background: var(--wrong);
-}
-.keyboard__letter--correct {
+
+.correct {
   background: var(--correct);
+}
+.semi-correct {
+  background: var(--semi-correct);
+}
+.wrong {
+  background: var(--wrong);
 }
 
 .board {
