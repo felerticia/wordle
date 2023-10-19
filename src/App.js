@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
 import Board from "./Board";
 import Keyboard from "./Keyboard";
+import Modal from "./Modal";
 import { words } from "./words";
 
 const ROWS = 6;
@@ -16,9 +17,15 @@ function App() {
   const [currentRow, setCurrentRow] = useState(0);
   const [currentWord, setCurrentWord] = useState("");
   const [letters, setLetters] = useState("");
+  const [gameStatus, setGameStatus] = useState("");
+
+  const ref = useRef();
+
+  const selectWord = () =>
+    setSolution(words[Math.floor(Math.random() * words.length)]);
 
   useEffect(() => {
-    setSolution(words[Math.floor(Math.random() * words.length)]);
+    selectWord();
   }, []);
 
   const handleKeyDown = useCallback(
@@ -51,11 +58,22 @@ function App() {
 
   useEffect(() => {
     if (guesses[currentRow - 1] === solution && solution) {
-      console.log("win");
+      setGameStatus("You Won!");
+      ref.current.openModal();
     } else if (currentRow > 5) {
-      console.log("lose");
+      setGameStatus("You Lost!");
+      ref.current.openModal();
     }
   }, [currentRow, guesses, solution]);
+
+  const handleGameReset = () => {
+    selectWord();
+    setGuesses(new Array(ROWS).fill(""));
+    setCurrentRow(0);
+    setCurrentWord("");
+    setLetters("");
+    setGameStatus("");
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -73,6 +91,12 @@ function App() {
         solution={solution}
       />
       <Keyboard letters={letters} solution={solution} />
+      <Modal
+        gameStatus={gameStatus}
+        ref={ref}
+        solution={solution}
+        handleGameReset={handleGameReset}
+      />
     </div>
   );
 }
