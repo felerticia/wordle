@@ -22,7 +22,7 @@ const getColors = (solution, word) => {
 const Row = ({ word, solution, isFinished }) => {
   const colors = isFinished ? getColors(solution, word) : new Array(5).fill("");
 
-  return new Array(5).fill("").map((cell, idx) => (
+  return new Array(5).fill("").map((_, idx) => (
     <div className={`board__cell ${colors[idx]}`} key={idx}>
       {word[idx] ?? ""}
     </div>
@@ -31,7 +31,7 @@ const Row = ({ word, solution, isFinished }) => {
 
 const Board = ({ guesses, currentWord, currentRow, solution }) => (
   <div className="board">
-    {guesses.map((row, rowIdx) => (
+    {guesses.map((_, rowIdx) => (
       <div key={rowIdx} className="board__row">
         <Row
           solution={solution}

@@ -72,7 +72,7 @@ function App() {
         currentRow={currentRow}
         solution={solution}
       />
-      <Keyboard letters={letters} />
+      <Keyboard letters={letters} solution={solution} />
     </div>
   );
 }
