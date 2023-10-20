@@ -1,12 +1,15 @@
 const rows = ["QWERTYUIOP", "ASDFGHJKL+", "ZXCVBNM-"];
 
-const getColor = (letter, solution) => {
-  if (solution.includes(letter)) return "correct";
+const getColor = (letter, solution, guesses) => {
+  const ind = solution.indexOf(letter);
+  if (ind === -1) return "wrong";
 
-  return "wrong";
+  if (guesses.find((guess) => guess[ind] === letter)) return "correct";
+
+  return "semi-correct";
 };
 
-const Keyboard = ({ letters, solution }) => (
+const Keyboard = ({ letters, solution, guesses }) => (
   <div className="keyboard">
     {rows.map((row, rowIdx) => (
       <div key={rowIdx} className="keyboard__row">
@@ -14,7 +17,7 @@ const Keyboard = ({ letters, solution }) => (
           <div
             key={letterIdx}
             className={`keyboard__letter ${
-              letters.includes(letter) && getColor(letter, solution)
+              letters.includes(letter) && getColor(letter, solution, guesses)
             }`}
           >
             {letter === "+" ? "Enter" : letter === "-" ? "Delete" : letter}

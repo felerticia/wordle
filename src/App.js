@@ -90,7 +90,7 @@ function App() {
         currentRow={currentRow}
         solution={solution}
       />
-      <Keyboard letters={letters} solution={solution} />
+      <Keyboard letters={letters} solution={solution} guesses={guesses} />
       <Modal
         gameStatus={gameStatus}
         ref={ref}
