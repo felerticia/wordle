@@ -36,8 +36,8 @@ function App() {
         return;
       }
       if (currentWord.length === 5) {
-        if (keyCode !== 13 && keyCode !== 8) return;
-        if (keyCode === 13) {
+        if (keyCode !== 13) return;
+        else {
           setGuesses((guesses) =>
             guesses.map((guess, idx) =>
               idx === currentRow ? currentWord : guess
@@ -46,6 +46,7 @@ function App() {
           setCurrentRow((currentRow) => currentRow + 1);
           setLetters((letters) => merge(letters, currentWord));
           setCurrentWord("");
+          return;
         }
       }
 
@@ -55,6 +56,12 @@ function App() {
     },
     [currentWord, currentRow]
   );
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   useEffect(() => {
     if (guesses[currentRow - 1] === solution && solution) {
@@ -74,13 +81,6 @@ function App() {
     setLetters("");
     setGameStatus("");
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleKeyDown]);
 
   return (
     <div className="App">

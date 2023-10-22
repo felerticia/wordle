@@ -7,9 +7,16 @@ const getColors = (solution, word) => {
     }
   }
 
-  for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < solution.length; i++) {
     const ind = convertedSolution.indexOf(word[i]);
-    if (ind > -1 && convertedSolution[i] !== "*") convertedSolution[i] = "+";
+    if (
+      ind > -1 &&
+      convertedSolution[ind] !== "*" &&
+      convertedSolution[ind] !== "+"
+    ) {
+      convertedSolution[i] = "+";
+      convertedSolution[ind] = "";
+    }
   }
 
   return convertedSolution.map((letter) => {
